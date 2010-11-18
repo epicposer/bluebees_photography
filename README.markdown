@@ -1,6 +1,8 @@
 Grokphoto
 =========
 
+NOTE: This is the Rails 3 branch. If you're looking for a Rails 2 version, please select it from the branches drop-down (or git checkout rails2).
+
 Grokphoto is a professional photographer's client and booking management solution, as well as a gallery / portfolio where they can showcase for their work.
 
 ### [Watch the Video](http://grokphoto.org/introduction.html) ###
