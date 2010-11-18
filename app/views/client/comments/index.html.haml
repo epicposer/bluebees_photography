@@ -1,0 +1,26 @@
+-content_for :sidebar do
+  %h2= "#{parent_class.to_s.humanize.titleize} Comments"
+  %p= "This is a list of all of the comments for the #{parent_class.to_s.humanize.titleize}."
+  %p You can expand the view and reply to comments for a photo by clicking on it's image.
+
+#breadcrumb
+  = "#{link_to(current_client.name + ' Bookings', client_bookings_path)} &raquo; All #{@booking.title} Comments"
+
+.paging{ :style => 'margin-right: 70px;' }
+  = will_paginate(@comments)
+%fieldset.comments{ :style => 'padding-bottom: 15px;' }
+  %legend= "Comments for #{parent.title}"
+  - for comment in @comments
+    .comment
+      .comment-body
+        %label
+          = "#{comment.author} wrote"
+          %br
+          %small{:style => 'font-weight: normal;'}
+            = "at #{comment.created_at.strftime('%I:%M %p on %B %d, %Y')}"
+        %p= h(comment.body)
+      .comment-photo
+        %p= link_to(image_tag(comment.booking_photo.url(:thumb)), client_booking_booking_photo_path(@booking, comment.booking_photo))
+    %p{ :class => 'clear' }
+%div{ :style => 'float:right; margin-right: 70px;' }
+  = will_paginate(@comments)

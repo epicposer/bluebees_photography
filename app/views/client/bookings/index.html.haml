@@ -1,0 +1,24 @@
+-content_for :sidebar do
+  %h2 Your Bookings
+  %p These are you bookings. Each booking contains the photos from your session. No one else has access to your booking photos.
+  %p You can review your photos for a booking by clicking the "Photos" link next to the booking.
+  %p You can view all comments for a booking by clicking the "Comments" link next to the booking.
+
+- if @bookings.size == 0
+  %h2 Your booking access has expired.
+%ul.image_list
+  - for booking in @bookings
+    %li
+      %div
+        = truncate(booking.title, :length => 22)
+        - if booking.expired?
+          .expired
+            EXPIRED
+      - if booking.photos.first
+        = "#{link_to(image_tag(booking.photos.first.image.url(:thumb), :size => '150x100'), client_booking_photos_path(booking))}<br />"
+      - else
+        = "#{link_to(image_tag('thumb/missing.png', :size => '150x100'), client_booking_photos_path(booking))}<br />"
+      .actions
+        = link_to('Photos', client_booking_photos_path(booking))
+        = "| #{link_to('Comments', client_booking_photo_comments_path(booking))}" unless booking.comments.blank?
+  
