@@ -4,7 +4,7 @@
     %meta{ :content => "text/html;charset=UTF-8", "http-equiv" => "content-type" }
     %meta{ :content => "chrome=1", "http-equiv" => "X-UA-Compatible" }
     %title
-      = "#{controller.controller_name.humanize.titleize} - Administration - #{@photographer.company_name}"
+      = "#{controller.controller_name.humanize.titleize} - Administration - #{@photographer.name}"
     = stylesheet_link_tag('admin.css', :media => 'screen, projection')
     = stylesheet_link_tag('global/print.css', :media => 'print')
     /[if lt IE 8]
@@ -19,7 +19,7 @@
       #header
         #logo
           %h1
-            = "#{@photographer.company_name} Administration"
+            = "#{@photographer.name} Administration"
         #nav
           %ul.tabs
             - if current_photographer
@@ -46,4 +46,4 @@
           = yield
       #footer
         .faux-hr
-        = "Copyright &copy; 2010, #{@photographer.company_name}, &nbsp; All Rights Reserved"
+        = "Copyright &copy; 2010, #{@photographer.name}, &nbsp; All Rights Reserved"

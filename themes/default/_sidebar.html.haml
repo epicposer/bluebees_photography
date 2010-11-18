@@ -1,13 +1,13 @@
 %h3 Contact Info
 %p 
-  = enkode_mail( @photographer.company_email, @photographer.company_email, "Email Me", "#{@photographer.company_name} - Request" )
-  = "<br /><br />#{@photographer.company_phone}<br />" unless @photographer.company_phone.blank?
-  = "<br />#{link_to 'Blog', @photographer.blog_url}" unless @photographer.blog_url.blank?
-  = "| #{link_to('Facebook', @photographer.facebook_url, :title => 'My Facebook Page')}" unless @photographer.facebook_url.blank?
-  = "| #{link_to('Twitter', @photographer.twitter_url, :title => 'Follow me on Twitter')}" unless @photographer.twitter_url.blank?
+  = raw(enkode_mail( @photographer.email, @photographer.email, "Email Me", "#{@photographer.name} - Request" ))
+  = raw("<br /><br />#{@photographer.phone}<br />") unless @photographer.phone.blank?
+  = raw("<br />#{link_to 'Blog', @photographer.blog_url}") unless @photographer.blog_url.blank?
+  = raw("| #{link_to('Facebook', @photographer.facebook_url, :title => 'My Facebook Page')}") unless @photographer.facebook_url.blank?
+  = raw("| #{link_to('Twitter', @photographer.twitter_url, :title => 'Follow me on Twitter')}") unless @photographer.twitter_url.blank?
 %h3 Client Testimonials
 - for testimonial in @testimonials
   %p
-    %i= "\"#{h(testimonial.body)}\""
+    %i= "\"#{testimonial.body}\""
     %br
-    %b= h(testimonial.author)
+    %b= testimonial.author

@@ -18,7 +18,7 @@
           %br
           %small{:style => 'font-weight: normal;'}
             = "at #{comment.created_at.strftime('%I:%M %p on %B %d, %Y')}"
-        %p= h(comment.body)
+        %p= comment.body
       .comment-photo
         %p= link_to(image_tag(comment.booking_photo.url(:thumb)), client_booking_booking_photo_path(@booking, comment.booking_photo))
     %p{ :class => 'clear' }

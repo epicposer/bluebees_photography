@@ -77,7 +77,7 @@
   %li{ :class => 'last', :style => 'padding-left: 0' } Select a Gallery: 
   - @galleries.each_with_index do |gallery, i|
     %li{ :class => "#{'last' if (i + 1) == @galleries.size}" }
-      = link_to(h(gallery.title), gallery_path(gallery), :title => h(gallery.title), :class => "#{'active' if @gallery.id == gallery.id}")
+      = link_to(gallery.title, gallery_path(gallery), :title => gallery.title, :class => "#{'active' if @gallery.id == gallery.id}")
 
 #content
   #main
@@ -89,11 +89,11 @@
       
   #sidebar
     %h2
-      = "#{h(@gallery.title)} Photos"
+      = "#{@gallery.title} Photos"
     %p
       Jump to a photo:
     %ul.gallery_thumbs
       - @gallery.gallery_photos.each_with_index do |photo, i|
         %li{ :class => "#{'active' if i == 0}" }
-          = image_tag(photo.image.url, :alt => h(photo.title))
+          = image_tag(photo.photo.url, :alt => photo.title)
     %p.clearfix

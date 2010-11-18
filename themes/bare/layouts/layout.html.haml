@@ -3,9 +3,9 @@
   %head
     %meta{ :content => "text/html;charset=UTF-8", "http-equiv" => "content-type" }
     %meta{ :content => "chrome=1", "http-equiv" => "X-UA-Compatible" }
-    %meta{ :name => 'Keywords', :content => "#{@photographer.company_name}, photography, professional, galleries, portfolio, clients, workflow" }
-    %meta{ :name => 'Description', :content => "#{@photographer.company_name}" }
-    %title= "#{controller.controller_name.humanize.titleize} - #{@photographer.company_name}"
+    %meta{ :name => 'Keywords', :content => "#{@photographer.name}, photography, professional, galleries, portfolio, clients, workflow" }
+    %meta{ :name => 'Description', :content => "#{@photographer.name}" }
+    %title= "#{controller.controller_name.humanize.titleize} - #{@photographer.name}"
     = stylesheet_link_tag 'cream.css', :media => 'screen, projection'
     = stylesheet_link_tag 'global/print.css', :media => 'print'
     /[if lt IE 8]

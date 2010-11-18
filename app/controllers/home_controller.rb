@@ -12,8 +12,8 @@ class HomeController < ApplicationController
   
   # landing page
   def index
-    @page_title = @photographer.home_page_title ||= 'Photographer'
-    @galleries = @photographer.galleries.find :all
+    @page_title = @photographer.name ||= 'Photographer'
+    @galleries = Gallery.all(:sort => :pos)
     render :template => '/home'
   end
   
@@ -33,9 +33,9 @@ class HomeController < ApplicationController
     # prepend the chosen (or default) theme
     def prepend_theme
       #session[:preview] = params[:preview] if params[:preview]
-      #self.prepend_view_path(config.theme_path(session[:preview]))
+      #self.prepend_view_path(@photographer.theme_path(session[:preview]))
       #flash[:notice] = "You're in preview mode" if session[:preview]
-      self.prepend_view_path(config.theme_path)
+      self.prepend_view_path(@photographer.theme_path)
     end
     
     def load_pages

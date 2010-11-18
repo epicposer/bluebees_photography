@@ -22,7 +22,7 @@ class GalleriesController < HomeController
       @page_title = "#{@gallery.title} Gallery"
       @page_keywords = @gallery.keywords.blank? ? "#{@gallery.title.downcase}, gallery, photography, portraits, professional" : @gallery.keywords
       @page_description = @gallery.description
-      @galleries = @photographer.galleries.find :all
+      @galleries = Gallery.all(:sort => :pos)
       render :template => '/gallery'
       return
     end

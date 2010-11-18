@@ -15,7 +15,7 @@
           .expired
             EXPIRED
       - if booking.photos.first
-        = "#{link_to(image_tag(booking.photos.first.image.url(:thumb), :size => '150x100'), client_booking_photos_path(booking))}<br />"
+        = "#{link_to(image_tag(booking.photos.first.photo.url(:thumb), :size => '150x100'), client_booking_photos_path(booking))}<br />"
       - else
         = "#{link_to(image_tag('thumb/missing.png', :size => '150x100'), client_booking_photos_path(booking))}<br />"
       .actions

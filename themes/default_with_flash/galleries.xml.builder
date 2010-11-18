@@ -39,7 +39,7 @@ xml.cu3er do
   xml.slides do
     for gallery in @galleries
       xml.slide do
-        xml.url gallery.image.url
+        xml.url gallery.slide.url
         xml.link gallery_path(gallery), :target => "_self"
         xml.description do
           xml.link gallery_path(gallery), :target => "_self"

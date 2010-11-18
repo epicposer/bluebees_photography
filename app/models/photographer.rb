@@ -12,7 +12,6 @@ class Photographer
   field :twitter_url
   field :blog_url
   field :google_analytics_key
-  field :google_verification_key
   field :theme
   field :use_watermark, :type => Boolean, :default => false
   
@@ -32,4 +31,33 @@ class Photographer
   
   # image
   mount_uploader :watermark, WatermarkUploader
+  
+  
+  # returns the path to the theme if one has been set,
+  # else returns the default theme path
+  def theme_path
+    #logger.debug "Previewing theme #{preview}"
+    #use_theme = preview.blank? ? theme : preview
+    #logger.debug "Using theme: #{use_theme}"
+    # set the path to the theme
+    path = File.join(RAILS_ROOT, 'themes', theme) unless theme.blank?
+    # use the default theme if none has been specified, or if the specified theme doesn't exist
+    path = File.join(RAILS_ROOT, 'themes', 'default') if path.blank? or !File.exists?(path)
+    return path
+  end
+  
+  # retrieve the available themes
+  def self.themes
+    found_themes = []
+    themes_path = File.join(RAILS_ROOT, 'themes')
+
+    Dir.glob("#{themes_path}/*").each do |theme_dir|
+      if File.directory?(theme_dir)
+        found_themes << File.basename(theme_dir)
+      end
+    end
+
+    found_themes
+  end
+  
 end
