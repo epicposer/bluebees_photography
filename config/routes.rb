@@ -8,6 +8,7 @@ Grokphoto::Application.routes.draw do
   resources :testimonials
   
   devise_for :clients
+  devise_for :photographers
 
   match 'client' => 'client/bookings#index'
   namespace :client do    
@@ -20,18 +21,27 @@ Grokphoto::Application.routes.draw do
   
   match 'admin' => 'admin/clients#index'
   namespace :admin do
+    resource :photographer
     resources :galleries do
-      resources :gallery_photos #member { put 'update_position' }
+      member { put 'update_position' }
+      resources :gallery_photos do
+        member { put 'update_position' }
+      end
     end
     resources :clients do
+      member { get 'invite' }
       resources :bookings do
         resources :booking_photos do
           resources :comments
         end
       end
     end
-    resources :pages
-    resources :testimonials
+    resources :pages do
+      member { put 'update_position' }
+    end
+    resources :testimonials do
+      member { put 'update_position' }
+    end
   end
   
 end

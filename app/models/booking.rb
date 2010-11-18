@@ -32,4 +32,15 @@ class Booking
     [] # TODO
   end
   
+  scope :active, where(:expires_on.gt => Time.now.utc)
+  scope :expired, where(:expires_on.lt => Time.now.utc)
+  
+  def expired?
+    if self.expires_on and self.expires_on < Date.today
+      return true
+    else
+      return false
+    end
+  end
+  
 end

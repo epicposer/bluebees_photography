@@ -5,7 +5,7 @@
   %p You can leave comments for a specific photo by clicking the "Comments" link for the photo.
 
 #breadcrumb
-  = "#{link_to(current_client.name + ' Bookings', client_bookings_path)} &raquo; #{@booking.title} Photos"
+  = raw "#{link_to(current_client.name + ' Bookings', client_bookings_path)} &raquo; #{@booking.title} Photos"
 
 %ul.image_list
   - for booking_photo in @booking_photos

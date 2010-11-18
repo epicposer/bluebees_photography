@@ -39,6 +39,11 @@ class Client::CommentsController < InheritedResources::Base
   end
   
   private #-------
+    
+    def begin_of_association_chain
+      @current_client
+    end
+    
     # Defining the collection explicitly for paging
     def collection
       @comments ||= end_of_association_chain.paginate :page => params[:page], :per_page => 10, :order => 'created_at DESC'

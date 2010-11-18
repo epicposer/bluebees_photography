@@ -3,8 +3,10 @@ class Photographer
   include Mongoid::Document
   include Mongoid::Timestamps
   
+  # :timeoutable
+  devise :database_authenticatable, :token_authenticatable, :recoverable, :rememberable, :validatable
+  
   field :name
-  field :email
   field :phone
   field :site_url
   field :blog_url
@@ -26,12 +28,14 @@ class Photographer
   validates_length_of :twitter_url, :within => 10..255, :allow_blank => true
   validates_length_of :theme, :within => 2..40
   
+  index :email, :unique => true
   key :name
   attr_protected :_id
   
   # image
   mount_uploader :watermark, WatermarkUploader
   
+  before_save :ensure_authentication_token
   
   # returns the path to the theme if one has been set,
   # else returns the default theme path

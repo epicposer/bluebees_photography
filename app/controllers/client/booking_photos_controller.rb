@@ -1,4 +1,7 @@
 class Client::BookingPhotosController < InheritedResources::Base
+  # this removes the layout for all ajax requests
+  layout proc { |controller| controller.request.xhr? ? nil : 'client' }
+  
   belongs_to :booking
   actions :index, :show
   respond_to :html
@@ -20,6 +23,10 @@ class Client::BookingPhotosController < InheritedResources::Base
   
   private #--------
   
+    def begin_of_association_chain
+      @current_client
+    end
+    
     # make sure the client is logged in and owns the bookings / photos they are trying to access
     def require_ownership
       if current_client.id == @booking.client.id

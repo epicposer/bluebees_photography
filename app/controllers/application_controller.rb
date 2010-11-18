@@ -3,6 +3,16 @@ class ApplicationController < ActionController::Base
   
   before_filter :load_photographer
   
+  layout :layout_by_resource
+
+  def layout_by_resource
+    if devise_controller?
+      'devise' # for amin sigin
+    else
+      'layout' # default
+    end
+  end
+  
   private #-----
   
     # retrieve photographer information so it can be used on every template and layout
@@ -25,5 +35,12 @@ class ApplicationController < ActionController::Base
         return
       end
     end
+    
+    # just using basic auth for the admin section
+    #def authenticate_admin!
+    #  authenticate_or_request_with_http_basic do |email, password|
+    #    email == @photographer.email && password == @photographer.password
+    #  end if RAILS_ENV == 'production' || params[:admin_http]
+    #end
     
 end

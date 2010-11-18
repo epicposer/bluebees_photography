@@ -1,0 +1,43 @@
+!!!
+%html{ "xml:lang" => "en", :lang => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %meta{ :content => "text/html;charset=UTF-8", "http-equiv" => "content-type" }
+    %meta{ :content => "chrome=1", "http-equiv" => "X-UA-Compatible" }
+    %title
+      = "#{controller.controller_name.humanize.titleize} - #{@photographer.name}"
+    = stylesheet_link_tag('admin.css', :media => 'screen, projection')
+    = stylesheet_link_tag('global/print.css', :media => 'print')
+    /[if lt IE 8]
+      = stylesheet_link_tag('global/ie.css', :media => 'screen, projection')
+    = stylesheet_link_tag('global/gritter.css', 'global/colorbox.css', 'global/validationEngine.jquery.css', 'flick/jquery-ui-1.7.2.custom.css', :media => 'screen, projection', :cache => "admin_all")
+    = javascript_include_tag('jquery.min.js', 'jquery-ui.min.js', 'jquery.gritter.js', 'jquery.colorbox-min.js', 'jquery.tablednd_0_5.js', 'jquery.validationEngine.js', 'jquery.validationEngine-en.js', 'swfobject.js', 'jquery.uploadify.v2.1.0.min.js', 'positioning.js', 'admin.js', :cache => "admin_all")
+    = display_flash
+  %body
+    #container
+      #header
+        #logo
+          %h1= "#{@photographer.name} Photography"
+        #nav
+          %ul.tabs
+            - if photographer_signed_in?
+              %li= link_to 'Photographer Area', admin_path, :class => 'active'
+            - elsif client_signed_in?
+              %li= link_to 'Client Area', client_path, :class => 'active'
+            -else
+              %li= link_to 'Login', '', :class => 'active'
+      #main
+        #sidebar
+          .box
+            - if content_for?(:sidebar)
+              = content_for :sidebar
+            - else
+              %h2 Welcome
+              %p This is a protected area.
+              %p
+                Please sign in.
+                If you came here by mistake, please head back to the
+                = link_to('public area.', root_path)
+        #content= yield
+      #footer
+        .faux-hr
+        = raw "Copyright &copy; 2010, #{@photographer.name}, &nbsp; All Rights Reserved"

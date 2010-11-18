@@ -3,7 +3,7 @@ class Client
   include Mongoid::Timestamps
   
   # :token_authenticatable and :timeoutable
-  devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :trackable, :validatable, :lockable, :invitable
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :invitable
   
   field :name
   field :phone
@@ -24,11 +24,15 @@ class Client
   validates_length_of :country, :within => 3..32, :allow_blank => true
   validates_length_of :mail_code, :within => 5..20, :allow_blank => true
   
+  index :email, :unique => true
   key :name
   attr_protected :_id
   
   # hierarchical associations
   embeds_many :bookings
   references_many :comments, :inverse_of => :client
-  #embeds_many :comments
+  
+  def has_active_bookings?
+    self.bookings.active.size > 0
+  end
 end

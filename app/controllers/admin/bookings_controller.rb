@@ -1,7 +1,16 @@
 class Admin::BookingsController < InheritedResources::Base
   layout 'admin'
+  actions :all, :except => :show
   respond_to :html, :js
-  before_filter :authenticate_admin!
+  belongs_to :client
+  before_filter :authenticate_photographer!
+  
+  def new
+    new! {
+      @booking.occurs_on = 2.weeks.from_now.utc
+      @booking.expires_on = 4.weeks.from_now.utc
+    }
+  end
   
   # redirect to collection path
   def create
@@ -33,7 +42,8 @@ class Admin::BookingsController < InheritedResources::Base
   
   protected #----
     def collection
-      @bookings ||= end_of_association_chain.all(:sort => 'position')
+      @bookings ||= end_of_association_chain.order_by(:created_at.desc)
     end
     
 end
+

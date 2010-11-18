@@ -1,7 +1,7 @@
 class Admin::BookingPhotosController < InheritedResources::Base
   layout 'admin'
   respond_to :html, :js
-  before_filter :authenticate_admin!
+  before_filter :authenticate_photographer!
   
   # redirect to collection path
   def create
@@ -33,7 +33,7 @@ class Admin::BookingPhotosController < InheritedResources::Base
   
   protected #----
     def collection
-      @booking_photos ||= end_of_association_chain.all(:sort => 'created_at')
+      @booking_photos ||= end_of_association_chain.order_by(:created_at.desc)
     end
     
 end

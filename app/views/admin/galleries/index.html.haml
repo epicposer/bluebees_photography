@@ -1,0 +1,24 @@
+-content_for :sidebar do
+  %h2 Manage Galleries
+  %p Galleries are used to showcase your photos. The galleries you enter here will appear in the home page slides and throughout the rest of the site.
+  %p You can change the order that galleries appear in by clicking and dragging their title bars.
+  %p You can create a new gallery by clicking the "New Gallery" button.
+  %p You can manage a gallery's photos by clicking it's "Photos" link.
+  %p You can edit a gallery by clicking it's "Edit" link.
+  %p You can delete a gallery by clicking the red X button.
+
+= build_link_button("New Gallery &raquo;", new_resource_path)
+
+%p.clear
+
+%ul#position_container.image_list
+  - for gallery in @galleries
+    %li{ :id => "row_#{gallery.id}" }
+      .draggable
+        = truncate(gallery.title, :length => 22)
+        = link_to(image_tag('cancel.png'), resource_path(gallery), :class => "delete")
+      = raw "#{link_to(image_tag(gallery.slide.thumb.url, :size => '150x100'), edit_resource_path(gallery))}<br />"
+      .actions
+        = link_to('Edit', edit_resource_path(gallery))
+        |
+        = link_to('Photos', admin_gallery_gallery_photos_path(gallery))

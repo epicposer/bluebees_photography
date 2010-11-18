@@ -2,6 +2,8 @@ puts "Creating photographer"
 photographer = Photographer.create(
   :name => 'GrokPhoto',
   :email => "photographer@grokphoto.org",
+  :password => "password",
+  :password_confirmation => "password",
   :site_url => 'http://demo.grokphoto.org',
   :blog_url => 'http://rapin.com',
   :twitter_url => 'http://twitter.com/#!/rapind',

@@ -15,6 +15,8 @@ jQuery.ajaxSetup({
 
 $(document).ready(function() {
 
+  var auth_token = $("meta[name=csrf-token]").attr("content")
+  
 	// validate all forms
 	$("form").validationEngine();
 	
@@ -25,7 +27,7 @@ $(document).ready(function() {
 		if ( confirm("Are you sure you want to delete this record?") ) {
 			// put together the matching for related links
 			href_match = this.href.substring(this.href.length - 12);
-			$.post(this.href, {_method:"delete", authenticity_token:AUTH_TOKEN}, function(data) {
+			$.post(this.href, {_method:"delete", authenticity_token:auth_token}, function(data) {
 				// inform the user of status via gritter (growl)
         $.gritter.add({
       		title: data.title,
@@ -46,7 +48,7 @@ $(document).ready(function() {
 	
 	$('a.delete-no-conf').live('click', function(event) {
 		href_match = this.href.substring(this.href.length - 12);
-		$.post(this.href, {_method:"delete", authenticity_token:AUTH_TOKEN}, function(data) {
+		$.post(this.href, {_method:"delete", authenticity_token:auth_token}, function(data) {
 			// not going to message the user, gets cluttered
   	  // look for any related links, like edit, view etc. and remove them
 			$("a[href*='" + href_match + "']").each(function() { 
