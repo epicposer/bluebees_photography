@@ -17,21 +17,17 @@ class Admin::GalleryPhotosController < InheritedResources::Base
     end
   end
   
-  # for javascript notifications
+  # javascript notifications
   def destroy
     destroy! do |success, failure|
       success.js { 
-        flash[:notice] = 'Successfuly removed the photo.'
-        render :js => "window.location.reload();"
-        return
+        flash[:notice] = nil
+        render :json => {:title => 'Success', :message => 'Photo was successfuly removed.'} 
       }
-      failure.js { 
-        flash[:alert] = 'Ran into an error removing the photo. Please try again.'
-        render :js => "window.location.reload();"
-        return
-      }
+      failure.js { render :json => {:title => 'Error', :message => 'Ran into an error removing the photo. Please try again later.'} }
     end
   end
+  
   
   def flash_upload
     # validate the token param

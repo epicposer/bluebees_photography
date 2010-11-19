@@ -16,7 +16,7 @@
     %th{ :colspan => "4", :width => "35%" } Actions
   - for client in @clients
     %tr{ :class => cycle("even_row", "odd_row") }
-      %td= h client.name
+      %td= client.name
       %td= client.email
       %td= client.last_sign_in_at.blank? ? 'Never' : client.last_sign_in_at.strftime("%B %d, %Y")
       %td= link_to("Send Invite", invite_admin_client_path(client))

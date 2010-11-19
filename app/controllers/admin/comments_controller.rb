@@ -17,23 +17,18 @@ class Admin::CommentsController < InheritedResources::Base
     end
   end
   
-  # for javascript notifications
+  # javascript notifications
   def destroy
     destroy! do |success, failure|
       success.js { 
-        flash[:notice] = 'Successfuly removed the comment.'
-        render :js => "window.location.reload();"
-        return
+        flash[:notice] = nil
+        render :json => {:title => 'Success', :message => 'Comment was successfuly removed.'} 
       }
-      failure.js { 
-        flash[:alert] = 'Ran into an error removing the comment. Please try again.'
-        render :js => "window.location.reload();"
-        return
-      }
+      failure.js { render :json => {:title => 'Error', :message => 'Ran into an error removing the comment. Please try again.'} }
     end
   end
   
-  protected #----
+  private #----
     def collection
       @comments ||= end_of_association_chain.order_by(:created_at.desc)
     end

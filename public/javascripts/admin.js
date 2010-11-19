@@ -25,9 +25,10 @@ $(document).ready(function() {
 	
 	$('a.delete').live('click', function(event) {
 		if ( confirm("Are you sure you want to delete this record?") ) {
-			// put together the matching for related links
-			href_match = this.href.substring(this.href.length - 12);
+		  var delete_link = this;
 			$.post(this.href, {_method:"delete", authenticity_token:auth_token}, function(data) {
+			  // remove the first parent list item or table row we find (assumes the delete link was in a table or a list)
+  			$(delete_link).parents('li, tr').first().fadeOut('fast', function() {$(this).remove()});
 				// inform the user of status via gritter (growl)
         $.gritter.add({
       		title: data.title,
@@ -35,27 +36,17 @@ $(document).ready(function() {
       		image: '/images/icons/notice.png',
       		time: 3000
       	});
-				// look for any related links, like edit, view etc. and remove them
-				$("a[href*='" + href_match + "']").each(function() { 
-					// change the link to text by adding the text we want and removing the link
-					$(this).after("x");
-					$(this).remove();
-				});
    	  }, "json");
 		}
 		return false;
 	});
 	
 	$('a.delete-no-conf').live('click', function(event) {
-		href_match = this.href.substring(this.href.length - 12);
+	  var delete_link = this;
 		$.post(this.href, {_method:"delete", authenticity_token:auth_token}, function(data) {
 			// not going to message the user, gets cluttered
-  	  // look for any related links, like edit, view etc. and remove them
-			$("a[href*='" + href_match + "']").each(function() { 
-				// change the link to text by adding the text we want and removing the link
-				$(this).after("x");
-				$(this).remove();
-			});
+			// remove the first parent list item or table row we find (assumes the delete link was in a table or a list)
+			$(delete_link).parents('li, tr').first().fadeOut('fast', function() {$(this).remove()});
 		}, "json");
 		return false;
 	});

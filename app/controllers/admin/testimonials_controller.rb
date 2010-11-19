@@ -16,19 +16,14 @@ class Admin::TestimonialsController < InheritedResources::Base
     end
   end
   
-  # for javascript notifications
+  # javascript notifications
   def destroy
     destroy! do |success, failure|
       success.js { 
-        flash[:notice] = 'Successfuly removed the testimonial.'
-        render :js => "window.location.reload();"
-        return
+        flash[:notice] = nil
+        render :json => {:title => 'Success', :message => 'Testimonial was successfuly removed.'} 
       }
-      failure.js { 
-        flash[:alert] = 'Ran into an error removing the testimonial. Please try again.'
-        render :js => "window.location.reload();"
-        return
-      }
+      failure.js { render :json => {:title => 'Error', :message => 'Ran into an error removing the testimonial. Please try again.'} }
     end
   end
   

@@ -12,7 +12,6 @@
     = stylesheet_link_tag('global/gritter.css', 'global/colorbox.css', 'global/validationEngine.jquery.css', 'flick/jquery-ui-1.7.2.custom.css', :media => 'screen, projection', :cache => "admin_all")
     = javascript_include_tag('jquery.min.js', 'jquery-ui.min.js', 'jquery.gritter.js', 'jquery.colorbox-min.js', 'jquery.tablednd_0_5.js', 'jquery.validationEngine.js', 'jquery.validationEngine-en.js', 'swfobject.js', 'jquery.uploadify.v2.1.0.min.js', 'positioning.js', 'admin.js', :cache => "admin_all")
     = csrf_meta_tag
-    = display_flash
     = javascript_tag "const BASE_PATH = '#{collection_path}/';" if defined?(collection_path) rescue nil
   %body
     #container
@@ -39,6 +38,10 @@
               %p Once you've logged in you can manage all of your galleries, clients, and photographs from here.
               %p This area is used to provide pertinent information about the tasks you're currently working on.
         #content
+          - if notice
+            .notice= notice
+          - elsif alert
+            .alert= alert
           = yield
       #footer
         .faux-hr

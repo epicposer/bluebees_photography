@@ -32,6 +32,13 @@ class Client
   embeds_many :bookings
   references_many :comments, :inverse_of => :client
   
+  before_validation :password_confirmation_workaround
+  
+  # haven't figured out a way to simple disable it in devise easily, so here's our hack.
+  def password_confirmation_workaround
+    self.password_confirmation = self.password
+  end
+  
   def has_active_bookings?
     self.bookings.active.size > 0
   end

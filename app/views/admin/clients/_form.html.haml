@@ -5,9 +5,10 @@
   %p Whenever you add a new client to the site, the system will automatically email them with their account and login information.
 
 #breadcrumb
-  = "#{link_to('Clients', admin_clients_path)} &raquo; #{controller.action_name.titleize}"
-  
-= f.error_messages
+  = raw "#{link_to('Clients', admin_clients_path)} &raquo; #{controller.action_name.titleize}"
+
+= render "admin/shared/error_messages", :target => @client
+
 %div{ :style => "width:50%; float:left;" }
   %p
     = f.label :name, "Name"
@@ -15,8 +16,9 @@
   %p
     = f.label :email
     = f.text_field :email, :class => 'text validate[required,custom[email]]'
-  - if @client.id.blank?
-    = f.hidden_field :password, :value => Authlogic::Random.friendly_token
+  %p
+    = f.label :password
+    = f.password_field :password, :class => 'text validate[required,length[6, 10]]'
   = render :partial => "admin/shared/buttons"
   
 %div{ :style => "width:50%; float:left;" }
@@ -26,20 +28,20 @@
     = f.label :phone, "Phone"
     = f.text_field :phone, :class => 'text validate[optional,custom[telephone],length[7,20]]'
   %p
-    = f.label :street_1, "Address 1"
-    = f.text_field :street_1, :class => 'text validate[optional,length[8,100]]'
+    = f.label :street1, "Address 1"
+    = f.text_field :street1, :class => 'text validate[optional,length[8,100]]'
   %p
-    = f.label :street_2, "Address 2"
-    = f.text_field :street_2, :class => 'text validate[optional,length[1,80]]'
+    = f.label :street2, "Address 2"
+    = f.text_field :street2, :class => 'text validate[optional,length[1,80]]'
   %p
     = f.label :city, "City"
     = f.text_field :city, :class => 'text validate[optional,length[3,70]]'
   %p
-    = f.label :province, "Province / State Code"
-    = f.text_field :province, :class => 'text numeric validate[optional,length[2,2]]'
+    = f.label :province_state, "Province / State Code"
+    = f.text_field :province_state, :class => 'text numeric validate[optional,length[2,2]]'
   %p
     = f.label :country, "Country Code"
     = f.text_field :country, :class => 'text numeric validate[optional,length[2,2]]'
   %p
-    = f.label :postal_code, "Postal / Zip Code"
-    = f.text_field :postal_code, :class => 'text numeric validate[optional,length[5,14]]'
+    = f.label :mail_code, "Postal / Zip Code"
+    = f.text_field :mail_code, :class => 'text numeric validate[optional,length[5,14]]'

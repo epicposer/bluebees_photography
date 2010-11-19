@@ -15,23 +15,18 @@ class Admin::BookingPhotosController < InheritedResources::Base
     end
   end
   
-  # for javascript notifications
+  # javascript notifications
   def destroy
     destroy! do |success, failure|
       success.js { 
-        flash[:notice] = 'Successfuly removed the photo.'
-        render :js => "window.location.reload();"
-        return
+        flash[:notice] = nil
+        render :json => {:title => 'Success', :message => 'Photo was successfuly removed.'} 
       }
-      failure.js { 
-        flash[:alert] = 'Ran into an error removing the photo. Please try again.'
-        render :js => "window.location.reload();"
-        return
-      }
+      failure.js { render :json => {:title => 'Error', :message => 'Ran into an error removing the photo. Please try again.'} }
     end
   end
   
-  protected #----
+  private #----
     def collection
       @booking_photos ||= end_of_association_chain.order_by(:created_at.desc)
     end

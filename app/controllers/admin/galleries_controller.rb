@@ -15,19 +15,14 @@ class Admin::GalleriesController < InheritedResources::Base
     end
   end
   
-  # for javascript notifications
+  # javascript notifications
   def destroy
     destroy! do |success, failure|
       success.js { 
-        flash[:notice] = 'Successfuly removed the gallery.'
-        render :js => "window.location.reload();"
-        return
+        flash[:notice] = nil
+        render :json => {:title => 'Success', :message => 'Gallery was successfuly removed.'} 
       }
-      failure.js { 
-        flash[:alert] = 'Ran into an error removing the gallery. Please try again.'
-        render :js => "window.location.reload();"
-        return
-      }
+      failure.js { render :json => {:title => 'Error', :message => 'Ran into an error removing the gallery. Please try again.'} }
     end
   end
   
