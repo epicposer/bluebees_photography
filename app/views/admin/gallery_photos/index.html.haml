@@ -3,13 +3,13 @@
     $("#uploadify").uploadify({
   		'uploader'       : '/uploadify.swf',
   		'script'         : BASE_PATH + 'flash_upload',
-  		'fileDataName'   : 'gallery_photo[image]',
+  		'fileDataName'   : 'gallery_photo[photo]',
   		'cancelImg'      : '/images/cancel.png',
   		'folder'         : '/tmp',
   		'queueID'        : 'fileQueue',
   		'auto'           : true,
   		'multi'          : true,
-  		'fileDesc'       : 'Images',
+  		'fileDesc'       : 'Photos',
   		'fileExt'        : '*.jpg;',
   		'buttonText'     : 'Add Photos',
   		'onComplete'     : load_photo,
@@ -52,12 +52,5 @@
 %p{ :class => 'clearfix' }
 
 %ul{ :id => 'position_container', :class => 'image_list' }
-  - for gallery_photo in @gallery_photos
-    %li{ :id => "row_#{gallery_photo.id}" }
-      .draggable
-        = truncate(gallery_photo.title, :length => 22)
-        = link_to(image_tag('cancel.png'), resource_path(gallery_photo), :class => "delete-no-conf")
-      = raw "#{link_to(image_tag(gallery_photo.photo.thumb.url, :size => '150x100'), gallery_photo.photo.url, :title => gallery_photo.title, :rel => 'colorbox')}<br />"
-      .actions
-        = link_to('Edit', edit_resource_path(gallery_photo))
-    
+  = render :partial => "row", :collection => @gallery_photos
+  

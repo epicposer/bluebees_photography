@@ -5,12 +5,12 @@
     - if row.expired?
       .expired
         EXPIRED
-  - if row.photos.first
-    = "#{link_to(image_tag(row.photos.first.image.url(:thumb), :size => '150x100'), admin_booking_photos_path(row))}<br />"
+  - if row.booking_photos.first
+    = raw "#{link_to(image_tag(row.booking_photos.first.image.thumb.url, :size => '150x100'), admin_client_booking_booking_photos_path(@client, row))}<br />"
   - else
-    = "#{link_to(image_tag('thumb/missing.png', :size => '150x100'), admin_booking_photos_path(row))}<br />"
+    = raw "#{link_to(image_tag('thumb/missing.png', :size => '150x100'), admin_client_booking_booking_photos_path(@client, row))}<br />"
   .actions
     = link_to('Edit', edit_resource_path(row))
     |
-    = link_to('Photos', admin_booking_photos_path(row))
-    = "| #{link_to('Comments', admin_booking_photo_comments_path(row))}" unless row.photo_comments.blank?
+    = link_to('Photos', admin_client_booking_booking_photos_path(@client, row))
+    =# "| #{link_to('Comments', admin_booking_comments_path(row))}" unless row.comments.blank?

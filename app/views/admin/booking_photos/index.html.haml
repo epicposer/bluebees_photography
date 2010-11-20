@@ -3,13 +3,13 @@
     $("#uploadify").uploadify({
   		'uploader'       : '/uploadify.swf',
   		'script'         : BASE_PATH + 'flash_upload',
-  		'fileDataName'   : 'photo[image]',
+  		'fileDataName'   : 'booking_photo[photo]',
   		'cancelImg'      : '/images/cancel.png',
   		'folder'         : '/tmp',
   		'queueID'        : 'fileQueue',
   		'auto'           : true,
   		'multi'          : true,
-  		'fileDesc'       : 'Images',
+  		'fileDesc'       : 'Photos',
   		'fileExt'        : '*.jpg;',
   		'buttonText'     : 'Add Photos',
   		'onComplete'     : load_photo,
@@ -44,7 +44,7 @@
   %p All client photos are automatically annotated with your company name when you upload them.
 
 #breadcrumb
-  = "#{link_to('Clients', admin_clients_path)} &raquo; #{link_to(@booking.client.name + ' Bookings', admin_client_bookings_path(@booking.client))} &raquo; #{@booking.title} Photos"
+  = raw "#{link_to('Clients', admin_clients_path)} &raquo; #{link_to(@client.name + ' Bookings', admin_client_bookings_path(@client))} &raquo; #{@booking.title} Photos"
 
 %div
   #fileQueue
@@ -54,4 +54,4 @@
 %p{ :class => 'clearfix' }
 
 %ul{ :class => 'image_list' }
-  = render :partial => "row", :collection => @photos
+  = render :partial => "row", :collection => @booking_photos

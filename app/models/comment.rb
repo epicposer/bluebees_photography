@@ -2,9 +2,10 @@ class Comment
   include Mongoid::Document
   include Mongoid::Timestamps
   
+  field :author
   field :body
 
-  validates_presence_of :body
+  validates_presence_of :author, :body
   validates_uniqueness_of :body, :case_sensitive => false
   
   # hierarchical associations

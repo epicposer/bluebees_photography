@@ -3,8 +3,12 @@
   %p Please upload an image by clicking the "Choose File" or "Upload" button to the right. This image should be sized 660 pixels wide and 440 pixels high (3:2 aspect ratio).
   %p If you omit the photo's title, the system will assign it's own title based on the image's file name. The title will be shown to your potential clients and is also used for SEO purposes.
   %p= "Click the \"#{(controller.action_name == 'new') ? 'Create' : 'Update'}\" button when you're done."
-    
-= f.error_messages
+
+#breadcrumb
+  = raw "#{link_to('Galleries', admin_galleries_path)} &raquo; #{link_to(@gallery.title + ' Photos', admin_gallery_gallery_photos_path(@gallery))} &raquo; #{controller.action_name.titleize}"
+  
+= render "admin/shared/error_messages", :target => @gallery_photo
+
 %div{ :style => "width:50%; float:left;" }
   %p
     = f.label :photo, "Upload Photo (Should be around 640x480 pixels)"

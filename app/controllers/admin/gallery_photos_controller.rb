@@ -33,12 +33,12 @@ class Admin::GalleryPhotosController < InheritedResources::Base
     # validate the token param
     if params[:token]
       # find the photographer by token
-      return unless Photographer.first.where(:authentication_token => params[:token])
+      return unless Photographer.where(:authentication_token => params[:token]).first
       gallery = Gallery.find(params[:gallery_id])
-      gallery_photo = gallery.gallery_photos.new(params[:gallery_photo])
+      gallery_photo = gallery.gallery_photos.create!(params[:gallery_photo])
       # need to assign the correct content type becuase this is missing from a flash upload
-      gallery_photo.photo.content_type = MIME::Types.type_for(gallery_photo.photo.filename).to_s
-      if gallery_photo.save
+      #gallery_photo.photo.content_type = MIME::Types.type_for(gallery_photo.photo.filename).to_s
+      if gallery_photo
         render :json => {:title => 'Success', :message => 'Photo was successfuly created.', :id => gallery_photo.id}
       else
         logger.debug "#{gallery_photo.errors.inspect}"

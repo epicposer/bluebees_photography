@@ -25,24 +25,27 @@ Grokphoto::Application.routes.draw do
   namespace :admin do
     resource :photographer
     resources :galleries do
-      member { put 'update_position' }
+      put :update_position, :on => :member
       resources :gallery_photos do
-        member { put 'update_position' }
+        put :update_position, :on => :member
+        post :flash_upload, :on => :collection
       end
     end
     resources :clients do
-      member { get 'invite' }
+      get :invite, :on => :member
       resources :bookings do
         resources :booking_photos do
+          get :ajax_row, :on => :member
+          post :flash_upload, :on => :collection
           resources :comments
         end
       end
     end
     resources :pages do
-      member { put 'update_position' }
+      put :update_position, :on => :member
     end
     resources :testimonials do
-      member { put 'update_position' }
+      put :update_position, :on => :member
     end
   end
   

@@ -1,36 +1,27 @@
 class Admin::CommentsController < InheritedResources::Base
   layout 'admin'
-  respond_to :html, :js
+  respond_to :html
   before_filter :authenticate_photographer!
-  actions :all, :except => :show
-  belongs_to :booking_photo
+  actions :index, :show, :new, :create
+  belongs_to :client, :booking, :booking_photo
   
-  # redirect to collection path
   def create
     create! do |success, failure|
-      success.html { redirect_to collection_path }
-    end
-  end
-  def update
-    update! do |success, failure|
-      success.html { redirect_to collection_path }
-    end
-  end
-  
-  # javascript notifications
-  def destroy
-    destroy! do |success, failure|
-      success.js { 
-        flash[:notice] = nil
-        render :json => {:title => 'Success', :message => 'Comment was successfuly removed.'} 
-      }
-      failure.js { render :json => {:title => 'Error', :message => 'Ran into an error removing the comment. Please try again.'} }
+      success.html do
+        flash[:notice] = 'Comment was added successfuly.'
+        redirect_to parent_path
+      end
+      failure.html do
+        flash[:warning] = 'Ran into an error adding your comment. Please try again.'
+        redirect_to parent_path
+      end
     end
   end
   
-  private #----
+  private #-------
+    # Defining the collection explicitly for paging
     def collection
-      @comments ||= end_of_association_chain.order_by(:created_at.desc)
+      @comments ||= end_of_association_chain.order_by(:created_at.desc).paginate :page => params[:page], :per_page => 10
     end
-    
+  
 end

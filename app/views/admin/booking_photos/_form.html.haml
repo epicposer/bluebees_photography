@@ -4,7 +4,8 @@
   %p You can upload the photo by clicking the "Choose File" or "Upload" button to the right.
   %p= "Click the \"#{(controller.action_name == 'new') ? 'Create' : 'Update'}\" button when you're done."
   
-= f.error_messages
+= render "admin/shared/error_messages", :target => @booking_photo
+
 %div{ :style => "width:50%; float:left;" }
   %p
     = f.label :image, "Upload Image (Should be around 640x480 pixels)"
@@ -15,7 +16,7 @@
     
 %div{ :style => "width:50%; float:left;" }
   %p
-    = link_to(image_tag(@photo.image.url(:thumb)), @photo.image.url, :rel => 'colorbox') if @photo.image.file?
+    = link_to(image_tag(@booking_photo.photo.thumb.url), @booking_photo.photo.url, :rel => 'colorbox') if @booking_photo.photo?
 
 %div{ :style => "width:100%; float:left;" }  
   = render :partial => "admin/shared/buttons"
