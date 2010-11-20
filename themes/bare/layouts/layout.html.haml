@@ -7,9 +7,9 @@
     %meta{ :name => 'Description', :content => "#{@photographer.name}" }
     %title= "#{controller.controller_name.humanize.titleize} - #{@photographer.name}"
     = stylesheet_link_tag 'cream.css', :media => 'screen, projection'
-    = stylesheet_link_tag 'global/print.css', :media => 'print'
+    = stylesheet_link_tag 'print.css', :media => 'print'
     /[if lt IE 8]
-      = stylesheet_link_tag 'global/ie.css', :media => 'screen, projection'
+      = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
     = javascript_include_tag 'jquery.min.js', 'jquery.galleria.js', 'cream.js'
     = yield :head
     %link{ :rel => "shortcut icon", :href => "/favicon.ico", :type => "image/x-icon" }

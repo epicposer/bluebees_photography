@@ -5,6 +5,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   storage :file
+  # storage :grid_fs
   # storage :s3
 
   # Override the directory where uploaded files will be stored.
@@ -18,14 +19,8 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-  #process :resize_to_fill => [600, 400]
+  process :resize_to_fill => [660, 440]
 
-  #version :medium do
-  #  process :resize_to_fill => [300, 200]
-  #end
-  #version :small do
-  #  process :resize_to_fill => [150, 100]
-  #end
   version :thumb do
     process :resize_to_fill => [150, 100]
   end

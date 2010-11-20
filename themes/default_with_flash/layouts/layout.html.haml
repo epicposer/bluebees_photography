@@ -8,10 +8,10 @@
     %meta{ :name => 'description', :content => defined?(@page_description) ? @page_description : "#{@photographer.name}. Professional photographer in Toronto, ON, Canada. Specializing in newborn, maternity, kids, babies, and family portrait photography." }
     %title= @page_title ? "#{@page_title} - #{@photographer.name}" : "#{controller.controller_name.humanize.titleize} - #{@photographer.name}"
     = stylesheet_link_tag 'default.css', :media => 'screen, projection'
-    = stylesheet_link_tag 'global/print.css', :media => 'print'
+    = stylesheet_link_tag 'print.css', :media => 'print'
     /[if lt IE 8]
-      = stylesheet_link_tag 'global/ie.css', :media => 'screen, projection'
-    = stylesheet_link_tag('global/gritter.css', 'global/colorbox.css', :media => 'screen, projection', :cache => 'theme_all_default_with_flash')
+      = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
+    = stylesheet_link_tag('gritter.css', 'colorbox.css', :media => 'screen, projection', :cache => 'theme_all_default_with_flash')
     = javascript_include_tag('jquery.min.js', 'jquery.cycle.lite.1.0.min.js', 'jquery.gritter.js', 'jquery.colorbox-min.js', 'jquery.galleria.js', 'jquery.rightClick.js', 'swfobject.js', 'default.js', :cache => 'theme_all_default_with_cache')
     = yield :head
     %link{ :rel => "shortcut icon", :href => "/favicon.ico", :type => "image/x-icon" }

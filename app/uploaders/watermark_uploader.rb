@@ -5,6 +5,7 @@ class WatermarkUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   storage :file
+  # storage :grid_fs
   # storage :s3
 
   # Override the directory where uploaded files will be stored.
@@ -18,17 +19,12 @@ class WatermarkUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-  # Process files as they are uploaded:
-  # process :scale => [200, 300]
-  #
-  # def scale(width, height)
-  #   # do something
-  # end
+  process :resize_to_fill => [660, 440]
 
   # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process :scale => [50, 50]
-  # end
+  version :thumb do
+    process :resize_to_fill => [150, 100]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

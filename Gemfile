@@ -11,6 +11,7 @@ gem 'devise', '1.1.3'
 gem 'devise_invitable', '0.3.5' # https://github.com/scambra/devise_invitable
 gem 'mini_magick', '3.1' # image uploads
 gem 'carrierwave', '0.5.0' # image uploads
+gem 'fog', '0.3.23' # image upload storage on S3
 gem 'inherited_resources', '1.1.2'
 gem 'has_scope', '0.5.0'
 gem 'responders', '0.6.2'
