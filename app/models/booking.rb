@@ -3,6 +3,7 @@ class Booking
   include Mongoid::Timestamps
   
   field :title
+  field :slug
   field :occurs_on, :type => DateTime
   field :expires_on, :type => DateTime
   field :price_in_cents, :type => Integer
@@ -12,7 +13,7 @@ class Booking
   validates_presence_of :title
   validates_uniqueness_of :title, :case_sensitive => false
   
-  key :title
+  key :slug
   attr_protected :_id
   
   # hierarchical associations
@@ -43,4 +44,10 @@ class Booking
     end
   end
   
+  
+  # for permalink (used as the key)
+  before_create :build_slug
+  def build_slug
+    self.slug = self.title.parameterize
+  end
 end

@@ -5,9 +5,10 @@
   %p= "Click the \"#{(controller.action_name == 'new') ? 'Create' : 'Update'}\" button when you're done."
 
 #breadcrumb
-  = "#{link_to('Testimonials', admin_testimonials_path)} &raquo; #{controller.action_name.titleize}"
+  = raw "#{link_to('Testimonials', admin_testimonials_path)} &raquo; #{controller.action_name.titleize}"
   
-= f.error_messages
+= render "admin/shared/error_messages", :target => @testimonial
+
 %p
   = f.label :author
   = f.text_field :author, :class => 'text validate[required,length[5,80]]'

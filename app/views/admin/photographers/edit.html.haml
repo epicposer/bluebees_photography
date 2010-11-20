@@ -1,11 +1,12 @@
-- form_for(@photographer, :url => resource_path, :html => { :multipart => true, :method => :put }) do |f|
+- form_for(@photographer, :url => admin_photographer_path, :html => { :multipart => true, :method => :put }) do |f|
   -content_for :sidebar do
     %h2 Settings
     %p Manage your site-wide settings here.
     %p The information you enter here is available in some areas of the site and also within system generated email notifications to your clients. 
     %p Click the "Update Settings" button when you're done.
 
-  = f.error_messages
+  = render "admin/shared/error_messages", :target => @photographer
+  
   %div{ :style => "width:50%; float:left;" }
     %p
       = f.label :email

@@ -6,6 +6,7 @@ class Client
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :invitable
   
   field :name
+  field :slug
   field :phone
   field :street1
   field :street2
@@ -25,7 +26,7 @@ class Client
   validates_length_of :mail_code, :within => 5..20, :allow_blank => true
   
   index :email, :unique => true
-  key :name
+  key :slug
   attr_protected :_id
   
   # hierarchical associations
@@ -41,5 +42,11 @@ class Client
   
   def has_active_bookings?
     self.bookings.active.size > 0
+  end
+  
+  # for permalink (used as the key)
+  before_create :build_slug
+  def build_slug
+    self.slug = self.name.parameterize
   end
 end

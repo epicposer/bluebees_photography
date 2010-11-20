@@ -38,7 +38,7 @@ class Admin::TestimonialsController < InheritedResources::Base
     end
   end
   
-  protected #----
+  private #----
     def collection
       @testimonials ||= end_of_association_chain.order_by(:pos.asc)
     end

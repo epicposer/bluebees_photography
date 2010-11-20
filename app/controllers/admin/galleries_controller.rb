@@ -37,7 +37,7 @@ class Admin::GalleriesController < InheritedResources::Base
     end
   end
   
-  protected #----
+  private #----
     def collection
       @galleries ||= end_of_association_chain.order_by(:pos.asc)
     end

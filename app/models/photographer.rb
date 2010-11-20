@@ -29,7 +29,6 @@ class Photographer
   validates_length_of :theme, :within => 2..40
   
   index :email, :unique => true
-  key :name
   attr_protected :_id
   
   # image

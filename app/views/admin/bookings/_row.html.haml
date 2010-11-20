@@ -6,7 +6,7 @@
       .expired
         EXPIRED
   - if row.booking_photos.first
-    = raw "#{link_to(image_tag(row.booking_photos.first.image.thumb.url, :size => '150x100'), admin_client_booking_booking_photos_path(@client, row))}<br />"
+    = raw "#{link_to(image_tag(row.booking_photos.first.photo.thumb.url, :size => '150x100'), admin_client_booking_booking_photos_path(@client, row))}<br />"
   - else
     = raw "#{link_to(image_tag('thumb/missing.png', :size => '150x100'), admin_client_booking_booking_photos_path(@client, row))}<br />"
   .actions

@@ -11,7 +11,7 @@
   %p= "Click the \"#{(controller.action_name == 'new') ? 'Create' : 'Update'}\" button when you're done."
 
 #breadcrumb
-  = "#{link_to('Clients', admin_clients_path)} &raquo; #{link_to(@client.name + ' Bookings', admin_client_bookings_path(@client))} &raquo; #{controller.action_name.titleize}"
+  = raw "#{link_to('Clients', admin_clients_path)} &raquo; #{link_to(@client.name + ' Bookings', collection_path)} &raquo; #{controller.action_name.titleize}"
   
 = render "admin/shared/error_messages", :target => @booking
 %p

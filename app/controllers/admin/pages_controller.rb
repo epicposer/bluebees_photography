@@ -38,7 +38,7 @@ class Admin::PagesController < InheritedResources::Base
     end
   end
   
-  protected #----
+  private #----
     def collection
       @pages ||= end_of_association_chain.order_by(:pos.asc)
     end

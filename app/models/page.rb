@@ -6,6 +6,7 @@ class Page
   
   field :pos, :type => Integer
   field :title
+  field :slug
   field :intro
   field :body
   field :keywords
@@ -17,11 +18,18 @@ class Page
   validates_length_of :body, :minimum => 10
   validates_length_of :keywords, :within => 3..200, :allow_blank => true
   
-  key :title
+  key :slug
   attr_protected :_id
   
   acts_as_list :column => :pos
   
   # image
   mount_uploader :image, ImageUploader
+  
+  # for permalink (used as the key)
+  before_create :build_slug
+  def build_slug
+    self.slug = self.title.parameterize
+  end
+  
 end
