@@ -33,7 +33,7 @@ $(document).ready(function() {
         // ajax post to save the position change
         // we're passing the parent booking, the moved row, and the new position of the row
         $.post(BASE_PATH + moved_row_id + '/update_position', {_method:"put", authenticity_token:auth_token, position:end_position}, function(data) {
-					json = eval('(' + data + ')');
+					var json = eval('(' + data + ')');
 					var icon = '/images/icons/notice.png';
 					//if (json.title === "Error") icon = '/images/icons/warning.png';
 	        // inform the user of success / fail via gritter (growl)
@@ -74,7 +74,7 @@ $(document).ready(function() {
       }
       // submit the id and position to the server via ajax
       $.post(document.location + '/' + row.id + '/update_position', {_method:"put", authenticity_token:auth_token, position:position}, function(data) {
-        json = eval('(' + data + ')');
+        var json = eval('(' + data + ')');
 				var icon = '/images/icons/notice.png';
 				if (json.title === "Error") icon = '/images/icons/warning.png';
         // inform the user of success / fail via gritter (growl)

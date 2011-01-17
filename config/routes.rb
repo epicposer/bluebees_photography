@@ -3,6 +3,8 @@ Grokphoto::Application.routes.draw do
   root :to => "home#index"
   # grifs serving file uploads
   # match "/images/uploads/*path" => "gridfs#serve"
+  match 'timestamp' => 'home#timestamp' # used to keep passenger spooled up in prod
+  map.resources :sitemap
 
   resources :galleries
   resources :gallery_photos

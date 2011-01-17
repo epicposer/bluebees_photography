@@ -45,7 +45,7 @@ group :development, :test do #, :cucumber, :test do
   gem 'haml-rails', '>= 0.3.4'
   gem 'hpricot', '>= 0.8.3'
   gem 'ruby_parser', '>= 2.0.5'
-  gem 'ruby-debug19', '>= 0.11.6' # specific to ruby 1.9, use ruby-debug if you're on 1.8.7
+  gem RUBY_VERSION >= "1.9" ? 'ruby-debug19' : 'ruby-debug'
   gem 'capistrano', '>= 2.5.19'
   #  gem 'fabrication', '>= 0.9.0'
   #  gem 'rspec-rails', '>= 2.0.1'
