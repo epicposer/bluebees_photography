@@ -3,14 +3,13 @@
   %head
     %meta{ :content => "text/html;charset=UTF-8", "http-equiv" => "content-type" }
     %meta{ :content => "chrome=1", "http-equiv" => "X-UA-Compatible" }
-    %title
-      = "#{controller.controller_name.humanize.titleize} - #{@photographer.name}"
+    %title= "#{controller.controller_name.humanize.titleize} - #{@photographer.name}"
     = stylesheet_link_tag('photog.css', :media => 'screen, projection')
     = stylesheet_link_tag('print.css', :media => 'print')
     /[if lt IE 8]
       = stylesheet_link_tag('ie.css', :media => 'screen, projection')
-    = stylesheet_link_tag('gritter.css', 'colorbox.css', 'validation.css', :media => 'screen, projection', :cache => "photog_all")
-    = javascript_include_tag('jquery.min.js', 'jquery-ui.min.js', 'jquery.gritter.js', 'jquery.colorbox-min.js', 'jquery.tablednd_0_5.js', 'jquery.validationEngine.js', 'jquery.validationEngine-en.js', 'swfobject.js', 'jquery.uploadify.v2.1.0.min.js', 'positioning.js', 'photog.js', :cache => "photog_all")
+    = stylesheet_link_tag('plugins/gritter.css', 'plugins/jquery.fancybox.css', 'plugins/validation.css', 'plugins/uploadify.css', :media => 'screen, projection', :cache => "photog_all")
+    = javascript_include_tag('jquery.js', 'jquery-ui.js', 'jquery.gritter.js', 'jquery.fancybox.js', 'jquery.tablednd_0_5.js', 'jquery.validationEngine.js', 'jquery.validationEngine-en.js', 'swfobject.js', 'jquery.uploadify.js', 'positioning.js', 'photog.js', :cache => "photog_all")
     = display_flash
   %body
     #container
