@@ -1,0 +1,12 @@
+%h3 Contact Info
+%p
+  = raw(enkode_mail( active_photographer.email, active_photographer.email, "Email Me", "#{active_photographer.name} - Request" ))
+  = raw("<br /><br />#{active_photographer.phone}<br />") unless active_photographer.phone.blank?
+  = raw("<br />#{link_to 'Blog', active_photographer.blog_url}") unless active_photographer.blog_url.blank?
+  = raw("| #{link_to('Facebook', active_photographer.facebook_url, :title => 'My Facebook Page')}") unless active_photographer.facebook_url.blank?
+  = raw("| #{link_to('Twitter', active_photographer.twitter_url, :title => 'Follow me on Twitter')}") unless active_photographer.twitter_url.blank?
+%h3 Client Testimonials
+%p
+  %i Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  %br
+  %b Franky Tomato

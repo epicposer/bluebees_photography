@@ -1,0 +1,12 @@
+#header
+  %h1
+    = link_to(active_photographer.name, root_path, :title => active_photographer.name)
+  %ul.nav
+    %li
+      = link_to('Portfolios', portfolios_path, :title => 'Photo Portfolios', :class => "#{'active' if controller.controller_name == 'portfolios'}")
+    - active_photographer.pages.each do |page|
+      %li
+        = link_to(page.title, page_path(page), :title => page.title, :class => "#{'active' if @page and @page.id == page.id}")
+    - unless active_photographer.blog_url.blank?
+      %li
+        = link_to('Blog', active_photographer.blog_url, :title => 'Photography Blog')

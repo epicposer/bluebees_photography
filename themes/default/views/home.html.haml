@@ -1,0 +1,18 @@
+:javascript
+  $(document).ready(function() {
+    $('#slides').cycle({
+      timeout: 5000,
+      speed: 3000
+    });
+  });
+
+#content
+  #slides
+    - @portfolios.each do |portfolio|
+      %div
+        = link_to(image_tag(portfolio.cover.url, :size => '960x540', :alt => portfolio.title), portfolio_path(portfolio), :id => portfolio.id, :title => portfolio.title)
+        %div{ :id => "description_#{portfolio.id}", :class => 'slide_description' }
+          %h2= portfolio.title
+          = portfolio.description
+
+%p.clearfix

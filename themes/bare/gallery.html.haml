@@ -1,5 +1,0 @@
-%h1= @gallery.title
-%p= @gallery.description
-%ul
-  - for photo in @gallery.gallery_photos
-    %li= link_to(image_tag(photo.photo.url(:thumb), :alt => photo.title), photo.photo.url, :title => photo.title)

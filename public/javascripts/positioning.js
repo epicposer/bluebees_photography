@@ -31,7 +31,7 @@ $(document).ready(function() {
         end_position++;
 
         // ajax post to save the position change
-        // we're passing the parent booking, the moved row, and the new position of the row
+        // we're passing the parent gallery, the moved row, and the new position of the row
         $.post(BASE_PATH + moved_row_id + '/update_position', {_method:"put", authenticity_token:auth_token, position:end_position}, function(data) {
 					var json = eval('(' + data + ')');
 					var icon = '/images/icons/notice.png';

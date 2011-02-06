@@ -1,0 +1,34 @@
+-content_for :sidebar do
+  %h2 Portfolio
+  %p Your galleries are where you showcase your work. The main image for a portfolio will show up in the covers on the front page of your site.
+  %p Please upload an image for your portfolio by clicking the "Choose File" or "Upload" button to the right. This image should be sized 960 pixels wide and 540 pixels high (16:9 aspect ratio).
+  %p Please enter a descriptive title for the portfolio. This title will be shown to your potential clients and used for SEO purposes.
+  %p= "Click the \"#{(controller.action_name == 'new') ? 'Create' : 'Update'}\" button when you're done."
+
+#breadcrumb
+  = raw "#{link_to('Portfolios', photog_galleries_path)} &raquo; #{controller.action_name.titleize}"
+  
+= render "photog/shared/error_messages", :target => @portfolio
+
+%div{ :style => "width:50%; float:left;" }
+  %p
+    = f.label :title
+    = f.text_field :title, :class => 'text validate[required,length[2,100]]'
+  %p
+    = f.label :cover, "Upload Portfolio Image (Should be 275x200 pixels)"
+    = f.file_field :cover, :class => 'text'
+  
+%div{ :style => "width:50%; float:left;" }
+  %p
+    = link_to(image_tag(@portfolio.cover.thumb.url), @portfolio.cover.url, :rel => 'colorbox') if @portfolio.cover?
+    
+%div{ :style => "width:100%; float:left;" }
+  %p
+    = f.label :keywords
+    = f.text_field :keywords, :class => 'text long validate[optional,length[3,200]]'
+  %p
+    = f.label :description
+    = f.text_area :description, :class => 'brief validate[required,length[5,1000]]'
+
+  = render :partial => "photog/shared/buttons"
+

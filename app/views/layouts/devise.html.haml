@@ -5,12 +5,12 @@
     %meta{ :content => "chrome=1", "http-equiv" => "X-UA-Compatible" }
     %title
       = "#{controller.controller_name.humanize.titleize} - #{@photographer.name}"
-    = stylesheet_link_tag('admin.css', :media => 'screen, projection')
+    = stylesheet_link_tag('photog.css', :media => 'screen, projection')
     = stylesheet_link_tag('print.css', :media => 'print')
     /[if lt IE 8]
       = stylesheet_link_tag('ie.css', :media => 'screen, projection')
-    = stylesheet_link_tag('gritter.css', 'colorbox.css', 'validation.css', :media => 'screen, projection', :cache => "admin_all")
-    = javascript_include_tag('jquery.min.js', 'jquery-ui.min.js', 'jquery.gritter.js', 'jquery.colorbox-min.js', 'jquery.tablednd_0_5.js', 'jquery.validationEngine.js', 'jquery.validationEngine-en.js', 'swfobject.js', 'jquery.uploadify.v2.1.0.min.js', 'positioning.js', 'admin.js', :cache => "admin_all")
+    = stylesheet_link_tag('gritter.css', 'colorbox.css', 'validation.css', :media => 'screen, projection', :cache => "photog_all")
+    = javascript_include_tag('jquery.min.js', 'jquery-ui.min.js', 'jquery.gritter.js', 'jquery.colorbox-min.js', 'jquery.tablednd_0_5.js', 'jquery.validationEngine.js', 'jquery.validationEngine-en.js', 'swfobject.js', 'jquery.uploadify.v2.1.0.min.js', 'positioning.js', 'photog.js', :cache => "photog_all")
     = display_flash
   %body
     #container
@@ -20,10 +20,8 @@
         #nav
           %ul.tabs
             - if photographer_signed_in?
-              %li= link_to 'Photographer Area', admin_path, :class => 'active'
-            - elsif client_signed_in?
-              %li= link_to 'Client Area', client_path, :class => 'active'
-            -else
+              %li= link_to 'Photographer Area', photog_path, :class => 'active'
+            - else
               %li= link_to 'Login', '', :class => 'active'
       #main
         #sidebar

@@ -1,0 +1,11 @@
+-content_for :sidebar do
+  %h4
+    = link_to '&laquo; Back', collection_path
+    &nbsp; | &nbsp;
+    = link_to 'Edit This Photo &raquo;', edit_resource_path
+  %p This is what your client sees when browsing his or her photos.
+
+#breadcrumb
+  = raw "#{link_to('Clients', photog_path)} &raquo; #{link_to(@client.name + ' Galleries', photog_client_galleries_path(@client))} &raquo; #{link_to @gallery.title + ' Photos', collection_path} &raquo; #{@gallery_photo.title}"
+
+= image_tag(@gallery_photo.photo.url)

@@ -1,10 +1,9 @@
-class PagesController < HomeController
-  inherit_resources
+class PagesController < InheritedResources::Base
   actions :show
   respond_to :html
-  
-  caches_action :show
-  
+
+  theme :active_theme
+
   def show
     show! do
       @page_title = @page.title
@@ -13,5 +12,11 @@ class PagesController < HomeController
       return
     end
   end
-  
+
+  private #----
+
+    def begin_of_association_chain
+      active_photographer
+    end
+
 end

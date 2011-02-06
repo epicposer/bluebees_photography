@@ -1,0 +1,47 @@
+!!!
+%html{ "xml:lang" => "en", :lang => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %meta{ :content => "text/html;charset=UTF-8", "http-equiv" => "content-type" }
+    %meta{ :content => "chrome=1", "http-equiv" => "X-UA-Compatible" }
+    %title
+      = "#{controller.controller_name.humanize.titleize} - Administration - #{active_photographer.name}"
+    = stylesheet_link_tag('photog.css', :media => 'screen, projection')
+    = stylesheet_link_tag('print.css', :media => 'print')
+    /[if lt IE 8]
+      = stylesheet_link_tag('ie.css', :media => 'screen, projection')
+    = stylesheet_link_tag('gritter.css', 'colorbox.css', 'validation.css', :media => 'screen, projection', :cache => "photog_all")
+    = javascript_include_tag('jquery.min.js', 'jquery-ui.min.js', 'jquery.gritter.js', 'jquery.colorbox-min.js', 'jquery.tablednd_0_5.js', 'jquery.validationEngine.js', 'jquery.validationEngine-en.js', 'swfobject.js', 'jquery.uploadify.v2.1.0.min.js', 'positioning.js', 'photog.js', :cache => "photog_all")
+    = csrf_meta_tag
+    = javascript_tag "const BASE_PATH = '#{collection_path}/';" if defined?(collection_path) rescue nil
+  %body
+    #container
+      #header
+        #logo
+          %h1
+            = "#{active_photographer.name} Administration"
+        #nav
+          %ul.tabs
+            %li= link_to "Galleries", photog_galleries_path, :class => "#{'active' if controller.controller_name == 'galleries' or controller.controller_name == 'gallery_photos'}"
+            %li= link_to "Portfolios", photog_portfolios_path, :class => "#{'active' if controller.controller_name == 'portfolios' or controller.controller_name == 'portfolio_photos'}"
+            %li= link_to "Pages", photog_pages_path, :class => "#{'active' if controller.controller_name == 'pages'}"
+            %li= link_to "Settings", edit_photog_photographer_path, :class => "#{'active' if controller.controller_name == 'photographers'}"
+            %li= link_to "Logout", destroy_photographer_session_path
+      #main
+        #sidebar
+          .box
+            -if @content_for_sidebar
+              = yield(:sidebar)
+            - else
+              %h2 Welcome
+              %p This is the photogistration area for your site.
+              %p Once you've logged in you can manage all of your galleries, clients, and photographs from here.
+              %p This area is used to provide pertinent information about the tasks you're currently working on.
+        #content
+          - if notice
+            .notice= notice
+          - elsif alert
+            .alert= alert
+          = yield
+      #footer
+        .faux-hr
+        = raw "Copyright &copy; 2010, #{active_photographer.name}, &nbsp; All Rights Reserved"

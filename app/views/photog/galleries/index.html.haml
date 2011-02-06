@@ -1,0 +1,13 @@
+-content_for :sidebar do
+  %h2 Galleries
+  %p Galleries are used to share photos with your clients. The galleries you create here will only be shared with people you decide.
+  %p You can manage a gallery's photos by clicking the "Photos" link next to the gallery.
+  %p You can edit a gallery by clicking the "Edit" link next to the gallery you want to change.
+  %p You can delete a gallery by clicking the "Delete" link next to the gallery you want to remove.
+
+= build_link_button("New Gallery &raquo;", new_resource_path)
+
+%p{ :class => 'clearfix' }
+
+%ul{ :class => 'image_list' }
+  = render :partial => "row", :collection => @galleries

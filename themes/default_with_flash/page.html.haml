@@ -1,8 +1,0 @@
-#intro
-  %h1= @page.intro.blank? ? @page.title : @page.intro
-#content
-  #main
-    = image_tag(@page.image.url, :alt => @page.title) if @page.image?
-    = raw(@page.body.markdown)
-  #sidebar
-    = render :partial => '/sidebar'

@@ -1,0 +1,33 @@
+javascripts:
+  common:
+    - public/javascripts/jquery.js
+    - public/javascripts/jquery-ui.js
+  galleries:
+    - public/javascripts/galleries.js
+  photog:
+    - public/javascripts/swfobject.js
+    - public/javascripts/jquery.uploadify.js
+    - public/javascripts/jquery.fancybox.js
+    - public/javascripts/jquery.gritter.js
+    - public/javascripts/jquery.tablednd_0_5.min.js
+    - public/javascripts/positioning.js
+    - public/javascripts/admin.js
+
+stylesheets:
+  ie:
+    - public/stylesheets/ie.css
+  print:
+    - public/stylesheets/print.css
+  common:
+    - public/stylesheets/plugins/uploadify.css
+    - public/stylesheets/plugins/jquery.fancybox.css
+    - public/stylesheets/plugins/jquery.gritter.css
+  public:
+    - public/stylesheets/plugins/superfish.css
+    - public/stylesheets/plugins/jquery.nivo-slider.css
+    - public/stylesheets/public.css
+    - public/stylesheets/cells.css
+  modal:
+    - public/stylesheets/modal.css
+  admin:
+    - public/stylesheets/admin.css
